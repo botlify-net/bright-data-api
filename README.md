@@ -40,5 +40,5 @@ String brightDataApiKey = "youApiKey";
 BrightDataAPI api = new BrightDataAPI(brightDataApiKey);
 ```
 
-If you want more example of usage, you can check the wiki at the following link:
+If you want more example of usage, you can check the wiki at the following link
 <a href="https://github.com/botlify-io/bright-data-api/wiki">here</a>.
