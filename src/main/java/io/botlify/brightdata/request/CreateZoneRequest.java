@@ -2,53 +2,76 @@ package io.botlify.brightdata.request;
 
 import io.botlify.brightdata.enums.*;
 import lombok.Builder;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.util.List;
 
-@Deprecated
 @Builder
 public class CreateZoneRequest {
 
-    String name;
+    @Nullable @Getter
+    private final String name;
 
-    PlanType type;
+    @Nullable @Getter
+    private final PlanType type;
 
-    IpType ipsType;
+    @Nullable @Getter
+    private final IpType ipsType;
 
-    BandwidthType bandwidthType;
+    @Nullable @Getter
+    private final BandwidthType bandwidthType;
 
-    IpAllocPresetType ipAllocPresetType;
+    @Nullable @Getter
+    private final IpAllocPresetType ipAllocPresetType;
 
-    Integer ipToAllocate;
+    @Nullable @Getter
+    private final Integer ipToAllocate;
 
-    String country;
+    @Nullable @Getter
+    private final String country;
 
-    String countryCity;
+    @Nullable @Getter
+    private final String countryCity;
 
-    Boolean mobile;
+    @Nullable @Getter
+    private final Boolean mobile;
 
-    Boolean serp;
+    @Nullable @Getter
+    private final Boolean serp;
 
-    Boolean cityTargetingPermission;
+    @Nullable @Getter
+    private final Boolean cityTargetingPermission;
 
-    Boolean enablingAsnTargetingPermission;
+    @Nullable @Getter
+    private final Boolean enablingAsnTargetingPermission;
 
-    Boolean vip;
+    @Nullable @Getter
+    private final Boolean vip;
 
-    VipsType vipsType;
+    @Nullable @Getter
+    private final VipsType vipsType;
 
-    Integer vips;
+    @Nullable @Getter
+    private final Integer vips;
 
-    List<String> domainWitelist;
+    @Nullable @Getter
+    private final List<String> domainWitelist;
 
-    String vipCountry;
+    @Nullable @Getter
+    private final String vipCountry;
 
-    String vipCountryCity;
+    @Nullable @Getter
+    private final String vipCountryCity;
 
+    /**
+     * Convert this object to a JSON object for the request.
+     * @return The JSON object.
+     */
     public @NotNull JSONObject toJSONObject() {
-        JSONObject plan = new JSONObject();
+        final JSONObject plan = new JSONObject();
         if (type != null)
             plan.put("type", type.toString());
         if (ipsType != null)
@@ -73,7 +96,7 @@ public class CreateZoneRequest {
             plan.put("asn", enablingAsnTargetingPermission);
         if (vip != null)
             plan.put("vip", vip);
-        if (vips != null)
+        if (vipsType != null)
             plan.put("vips_type", vipsType.toString());
         if (vips != null)
             plan.put("vips", vips);
@@ -83,7 +106,7 @@ public class CreateZoneRequest {
             plan.put("vip_country", vipCountry);
         if (vipCountryCity != null)
             plan.put("vip_country_city", vipCountryCity);
-        JSONObject jsonObject = new JSONObject();
+        final JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", name);
         jsonObject.put("plan", plan);
         return (jsonObject);

@@ -9,6 +9,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,10 +43,10 @@ public class ZoneAPI extends SubAPI {
      *     Link to the documentation
      * </a>.
      * @param zoneName The name of the zone to get information about it.
-     * @return A {@link ZoneInformation} object.
+     * @return A {@link ZoneInformation} object or {@code null} if the zone doesn't exist.
      * @throws IOException A network error occurred.
      */
-    public @NotNull ZoneInformation getZoneInformation(@NotNull final String zoneName) throws IOException {
+    public @Nullable ZoneInformation getZoneInformation(@NotNull final String zoneName) throws IOException {
         log.trace("Get information about zone: {}", zoneName);
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone?zone=" + zoneName;
 
@@ -55,6 +56,7 @@ public class ZoneAPI extends SubAPI {
                 .build();
 
         try (final Response response = client.newCall(request).execute()) {
+            if (response.code() != 200) return (null);
             final String body = response.body().string();
             log.trace("Response body: {}", body);
             return (new ZoneInformation(new JSONObject(body)));
