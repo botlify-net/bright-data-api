@@ -1,4 +1,4 @@
-package io.botlify.brightdata;
+package io.botlify.brightdata.request;
 
 import io.botlify.brightdata.enums.*;
 import lombok.Builder;
@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+@Deprecated
 @Builder
 public class CreateZoneRequest {
 

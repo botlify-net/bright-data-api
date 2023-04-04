@@ -1,4 +1,4 @@
-package io.botlify.brightdata;
+package io.botlify.brightdata.object;
 
 import io.botlify.brightdata.enums.IpType;
 import io.botlify.brightdata.enums.PlanType;
