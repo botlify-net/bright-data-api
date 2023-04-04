@@ -1,7 +1,7 @@
 # Bright-data API
 
 [![Latest release](https://img.shields.io/github/release/botlify-io/bright-data-api.svg)](https://github.com/botlify-io/bright-data-api/releases/latest)
-[![Build Status](https://api.travis-ci.com/botlify-io/birght-data-api.svg?branch=main)](https://github.com/botlify-io/guava/bright-data-api)
+[![Build Status](https://github.com/botlify-io/bright-data-api/workflows/Java%20CI/badge.svg?branch=master)](https://github.com/botlify-io/guava/bright-data-api/actions)
 
 ## How to install locally ?
 
