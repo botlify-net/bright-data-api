@@ -24,6 +24,15 @@ mvn clean install
 
 ### How to use ?
 
+Add the dependency in your pom.xml:
+```xml
+<dependency>
+    <groupId>io.botlify.brightdata</groupId>
+    <artifactId>bright-data-api</artifactId>
+	<version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
 Instantiate the BrightDataAPI class with your API key.
 ```java
 String brightDataApiKey = "youApiKey";
