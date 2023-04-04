@@ -5,12 +5,15 @@ import io.botlify.brightdata.object.LumTestEcho;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
-import okhttp3.OkHttpClient;
+import okhttp3.*;
 import okhttp3.internal.http2.Header;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
 /**
  * This class is the main class of the API.
@@ -49,6 +52,11 @@ public class BrightDataAPI {
     @NotNull @Getter(AccessLevel.PACKAGE)
     private final OkHttpClient client;
 
+    /**
+     * The rate limiter used to limit the number of request per second.
+     * The limit is 1.5 request per second, because the API is limited to 1 request
+     * per second, but we want to be sure that we don't exceed the limit.
+     */
     @NotNull
     private final RateLimiter rateLimiter = RateLimiter.create(1.5);
 
@@ -61,6 +69,77 @@ public class BrightDataAPI {
                     rateLimiter.acquire();
                     return chain.proceed(chain.request());
                 }).build();
+    }
+
+    /**
+     * This method test if the proxy is valid.
+     * It will call this <a href="https://lumtest.com/echo.json">link</a>
+     * and check if the response code is 200. If an error occurs like network or anything else,
+     * it will return {@code false}. This method will not set username and password
+     * for proxy authentication.
+     * @param host The host of the proxy.
+     * @param port The port of the proxy.
+     * @return {@code true} if the proxy is valid, {@code false} otherwise.
+     */
+    public boolean testProxyValidity(@NotNull final String host,
+                                     final int port) {
+        return (testProxyValidity(host, port, null, null));
+    }
+
+    /**
+     * This method test if the proxy is valid.
+     * It will call this <a href="https://lumtest.com/echo.json">link</a>
+     * and check if the response code is 200. If an error occurs like network or anything else,
+     * it will return {@code false}. The proxy will be the super proxy of BrightData host
+     * and port.
+     * @param username The username of the proxy.
+     * @param password The password of the proxy.
+     * @return {@code true} if the proxy is valid, {@code false} otherwise.
+     */
+    public boolean testProxyValidity(@NotNull final String username,
+                                  @NotNull final String password) {
+        return (testProxyValidity(brightDataSuperProxyHost, brightDataSuperProxyPort,
+                username, password));
+    }
+
+    /**
+     * This method test if the proxy is valid.
+     * It will call this <a href="https://lumtest.com/echo.json">link</a>
+     * and check if the response code is 200. If an error occurs like network or anything else,
+     * it will return {@code false}.
+     * @param host The host of the proxy.
+     * @param port The port of the proxy.
+     * @param username The username of the proxy.
+     * @param password The password of the proxy.
+     * @return {@code true} if the proxy is valid, {@code false} otherwise.
+     */
+    public boolean testProxyValidity(@NotNull final String host,
+                                     final int port,
+                                     @Nullable final String username,
+                                     @Nullable final String password) {
+        final OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port)));
+        if (username != null && password != null)
+            builder.proxyAuthenticator((route, response) -> {
+                String credential = Credentials.basic(username, password);
+                return response.request().newBuilder()
+                    .header("Proxy-Authorization", credential)
+                    .build();
+            });
+        final OkHttpClient client = builder.build();
+
+        final Request request = new Request.Builder()
+                .get()
+                .url("https://lumtest.com/echo.json")
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return (response.code() == 200);
+        } catch (Exception e) {
+            log.trace("Fail to test the proxy validity because of an error: {}",
+                    e.getMessage());
+            return (false);
+        }
     }
 
     /**
