@@ -2,7 +2,9 @@ package io.botlify.brightdata;
 
 import io.botlify.brightdata.object.LumTestEcho;
 import io.botlify.brightdata.object.ZoneInformation;
+import io.botlify.brightdata.request.CreateZoneRequest;
 import io.botlify.brightdata.response.AddIpInZoneResponse;
+import io.botlify.brightdata.response.ZoneCreatedResponse;
 import lombok.extern.log4j.Log4j2;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -70,9 +72,10 @@ public class ZoneAPI extends SubAPI {
      * </a>.
      * @param zoneName The name of the zone to check if it exists.
      * @return {@code true} if the zone exist, {@code false} otherwise.
+     * @throws IOException A network error occurred.
      */
     public boolean isZoneExist(@NotNull final String zoneName) throws IOException {
-        log.trace("Get information about zone: {}", zoneName);
+        log.trace("Get information about zone to known if zone exist: {}", zoneName);
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone?zone=" + zoneName;
 
         final Request request = new Request.Builder()
@@ -81,6 +84,66 @@ public class ZoneAPI extends SubAPI {
                 .build();
 
         try (final Response response = client.newCall(request).execute()) {
+            return (response.code() == 200);
+        }
+    }
+
+    /**
+     * Create a new zone.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419707464209-Add-a-Zone">
+     *     Link to the documentation
+     * </a>.
+     * @param createZoneRequest The request to create a new zone.
+     * @return The information about the zone created or {@code null} if the zone already exist.
+     * @throws IOException A network error occurred.
+     */
+    public @Nullable ZoneCreatedResponse createZone(@NotNull final CreateZoneRequest createZoneRequest) throws IOException {
+        log.trace("Create zone: {}", createZoneRequest);
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone";
+        final JSONObject bodyRequest = createZoneRequest.toJSONObject();
+        log.trace("Body request: {}", bodyRequest);
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(RequestBody.create(bodyRequest.toString(),
+                        okhttp3.MediaType.parse("application/json")))
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+        try (final Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            log.trace("Response code: {}", response.code());
+            log.trace("Response message: {}", body);
+            if (response.code() != 200) return (null);
+            log.trace("Response body: {}", body);
+            return (new ZoneCreatedResponse(new JSONObject(body)));
+        }
+    }
+
+    /**
+     * Delete the specified zone.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419833220497-Remove-Zone">
+     *     Link to the documentation
+     * </a>
+     * @param zone The name of the zone to delete.
+     * @return {@code true} if the zone has been deleted, {@code false} otherwise.
+     * @throws IOException A network error occurred.
+     */
+    public boolean deleteZone(@NotNull final String zone) throws IOException {
+        log.trace("Delete zone: {}", zone);
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone";
+        final JSONObject bodyRequest = new JSONObject();
+        bodyRequest.put("zone", zone);
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .delete(RequestBody.create(bodyRequest.toString(),
+                        okhttp3.MediaType.parse("application/json")))
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+        try (final Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            log.trace("Response code: {}", response.code());
+            log.trace("Response message: {}", body);
             return (response.code() == 200);
         }
     }
@@ -167,6 +230,7 @@ public class ZoneAPI extends SubAPI {
      * @param zone The name of the zone to add the IP.
      * @param ip The list of IP to add to the whitelist.
      * @return {@code true} if the IP has been added to the whitelist.
+     * @throws IOException A network error occurred.
      */
     public boolean whitelistIp(@NotNull final String zone,
                                @NotNull final String... ip) throws IOException {

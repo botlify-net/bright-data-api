@@ -33,6 +33,8 @@ public class BrightDataAPI {
     private final OkHttpClient client = new OkHttpClient();
 
     public BrightDataAPI(@NotNull final String apiKey) {
+        if (apiKey.isEmpty())
+            throw (new IllegalArgumentException("The API key cannot be empty."));
         this.authorizationHeader = new Header("Authorization", "Bearer " + apiKey);
     }
 

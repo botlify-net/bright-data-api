@@ -6,8 +6,21 @@ import org.jetbrains.annotations.Nullable;
 
 public enum PlanType {
 
+    /**
+     * The plan type for a static plan.
+     * It will use datacenter ips.
+     */
     STATIC("static"),
+
+    /**
+     * It will use residential ips.
+     */
     RESIDENT("resident"),
+
+    /**
+     * It will use a random ip to unblock websites in
+     * case of a block.
+     */
     UNBLOCKER("unblocker");
 
     @NotNull

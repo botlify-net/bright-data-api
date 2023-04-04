@@ -9,30 +9,54 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-@Builder
+@Builder(setterPrefix = "with")
 public class CreateZoneRequest {
 
-    @Nullable @Getter
+    /**
+     * The name of the zone.
+     */
+    @NotNull @Getter
     private final String name;
 
-    @Nullable @Getter
+    /**
+     * The plan of the zone.
+     */
+    @NotNull @Getter
     private final PlanType type;
 
+    /**
+     * The type of ips to use.
+     */
     @Nullable @Getter
     private final IpType ipsType;
 
+    /**
+     * The bandwidth type.
+     */
     @Nullable @Getter
     private final BandwidthType bandwidthType;
 
+    /**
+     * The ip allocation preset type.
+     */
     @Nullable @Getter
     private final IpAllocPresetType ipAllocPresetType;
 
+    /**
+     * The number of ip to allocate.
+     */
     @Nullable @Getter
     private final Integer ipToAllocate;
 
+    /**
+     * The country code of the zone ips.
+     */
     @Nullable @Getter
     private final String country;
 
+    /**
+     * The country city of the zone ips.
+     */
     @Nullable @Getter
     private final String countryCity;
 
@@ -71,9 +95,14 @@ public class CreateZoneRequest {
      * @return The JSON object.
      */
     public @NotNull JSONObject toJSONObject() {
+        final JSONObject result = new JSONObject();
+        // Zone object.
+        final JSONObject zoneObject = new JSONObject();
+        zoneObject.put("name", name);
+        result.put("zone", zoneObject);
+        // Plan object.
         final JSONObject plan = new JSONObject();
-        if (type != null)
-            plan.put("type", type.toString());
+        plan.put("type", type.toString());
         if (ipsType != null)
             plan.put("ips_type", ipsType.toString());
         if (bandwidthType != null)
@@ -106,10 +135,8 @@ public class CreateZoneRequest {
             plan.put("vip_country", vipCountry);
         if (vipCountryCity != null)
             plan.put("vip_country_city", vipCountryCity);
-        final JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", name);
-        jsonObject.put("plan", plan);
-        return (jsonObject);
+        result.put("plan", plan);
+        return (result);
 
     }
 

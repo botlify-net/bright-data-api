@@ -1,13 +1,17 @@
 package io.botlify.brightdata;
 
+import io.botlify.brightdata.enums.PlanType;
 import io.botlify.brightdata.object.ZoneInformation;
+import io.botlify.brightdata.request.CreateZoneRequest;
 import io.botlify.brightdata.response.AddIpInZoneResponse;
+import io.botlify.brightdata.response.ZoneCreatedResponse;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,6 +26,31 @@ class ZoneAPITest {
 
     @NotNull
     public final String brightDataCustomerId = System.getenv("BRIGHT_DATA_CUSTOMER_ID");
+
+    // Create zone.
+
+    /**
+     * This test will try to create a zone and delete it.
+     */
+    @Test
+    public void createZoneAndDeleteIt() throws IOException {
+        final ZoneAPI api = new BrightDataAPI(brightDataApiKey).getZoneAPI();
+
+        // random alpha string
+
+        final String zoneName = randomZoneName();
+
+        // Create the zone.
+        final CreateZoneRequest czr = CreateZoneRequest.builder()
+                .withName(zoneName)
+                .withType(PlanType.STATIC)
+                .build();
+        final ZoneCreatedResponse zoneInformation = api.createZone(czr);
+        System.out.println("zoneInformation: " + zoneInformation);
+        assertNotNull(zoneInformation);
+        // Delete the zone.
+        assertTrue(api.deleteZone(zoneName));
+    }
 
     // Zone information.
 
@@ -87,6 +116,21 @@ class ZoneAPITest {
         final ZoneAPI api = new BrightDataAPI(brightDataApiKey).getZoneAPI();
         final Map<String, List<String>> whitelistedIp = api.getWhitelistedInAllZones();
         assertNotNull(whitelistedIp);
+    }
+
+    /**
+     * Generate a random zone name.
+     * @return A random zone name as {@link String}.
+     */
+    private @NotNull String randomZoneName() {
+        final int LENGTH = 10;
+        final Random random = new Random();
+        final StringBuilder sb = new StringBuilder(LENGTH);
+        for (int i = 0; i < LENGTH; i++) {
+            char randomChar = (char)(random.nextInt(26) + 'a');
+            sb.append(randomChar);
+        }
+        return sb.toString();
     }
 
 }
