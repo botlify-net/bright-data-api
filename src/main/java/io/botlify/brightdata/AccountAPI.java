@@ -1,7 +1,20 @@
 package io.botlify.brightdata;
 
+import io.botlify.brightdata.response.account.Balance;
+import lombok.extern.log4j.Log4j2;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Log4j2
 public class AccountAPI extends SubAPI {
 
     /**
@@ -10,6 +23,32 @@ public class AccountAPI extends SubAPI {
      */
     AccountAPI(@NotNull final BrightDataAPI brightDataAPI) {
         super(brightDataAPI);
+    }
+
+
+    /**
+     * Get the balance of the account.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419694483473-Get-total-balance-through-API">
+     *     Link to the documentation
+     * </a>.
+     * @return The {@link Balance} object response.
+     */
+    public @NotNull Balance getBalance() throws IOException {
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/customer/balance";
+        log.trace("URL: {}", url);
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+
+        try (final Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            log.trace("Response body: {}", body);
+            final JSONObject jsonResponse = new JSONObject(body);
+            return (new Balance(jsonResponse));
+        }
     }
 
 }

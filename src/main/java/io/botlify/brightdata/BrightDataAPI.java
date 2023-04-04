@@ -63,6 +63,7 @@ public class BrightDataAPI {
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
+                .get()
                 .build();
 
         try (final okhttp3.Response response = client.newCall(request).execute()) {

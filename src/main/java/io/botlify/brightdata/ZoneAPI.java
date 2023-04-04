@@ -38,6 +38,9 @@ public class ZoneAPI extends SubAPI {
 
     /**
      * Get the information about the specified zone specified in parameter of the method.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419703061137-Get-Zone-info">
+     *     Link to the documentation
+     * </a>.
      * @param zoneName The name of the zone to get information about it.
      * @return A {@link ZoneInformation} object.
      * @throws IOException A network error occurred.
@@ -63,8 +66,8 @@ public class ZoneAPI extends SubAPI {
     /**
      * Get the list of IP in whitelist of the specified zone.
      * <a href="https://help.brightdata.com/hc/en-us/articles/4420106481041-Get-a-list-of-whitelisted-IPs-for-a-specific-Zone">
-     *   More information.
-     * </a>
+     *   Link to the documentation
+     * </a>.
      * @param zone The name of the zone to get the list of IP in whitelist.
      * @return The list of IP in whitelist in the zone given in parameter.
      * @throws IOException A network error occurred.
@@ -96,8 +99,8 @@ public class ZoneAPI extends SubAPI {
     /**
      * Return the list of IP in whitelist of all zones.
      * <a href="https://help.brightdata.com/hc/en-us/articles/4420106481041-Get-a-list-of-whitelisted-IPs-for-a-specific-Zone">
-     *   More information.
-     * </a>
+     *   Link to the documentation
+     * </a>.
      * @return A map with the name of the zone as key and the list of IP in whitelist as value.
      * @throws IOException A network error occurred.
      */
@@ -135,8 +138,8 @@ public class ZoneAPI extends SubAPI {
      * Add to the specified zone the list of Ip specified in parameter of the method
      * to the list of IP in whitelist.<br />
      * <a href="https://help.brightdata.com/hc/en-us/articles/4420252781457-Add-IP-to-Zone-whitelist">
-     *     More information.
-     * </a>
+     *     Link to the documentation
+     * </a>.
      * @param zone The name of the zone to add the IP.
      * @param ip The list of IP to add to the whitelist.
      * @return {@code true} if the IP has been added to the whitelist.
@@ -220,7 +223,7 @@ public class ZoneAPI extends SubAPI {
     /**
      * This method will request to add the specified number of IP to the specified zone.<br />
      * <a href="https://help.brightdata.com/hc/en-us/articles/4419834466833-Add-Static-Datacenter-ISP-IPs">
-     *     More information.
+     *     Link to the documentation
      * </a>
      * @param zoneName The name of the zone to add IP.
      * @param customerId The customer ID, also known as the account ID.
@@ -261,7 +264,7 @@ public class ZoneAPI extends SubAPI {
     /**
      * This method will request to remove the specified IP to the specified zone.<br />
      * <a href="https://help.brightdata.com/hc/en-us/articles/4419834577041-Remove-Static-Datacenter-ISP-IPs">
-     *     More information.
+     *     Link to the documentation
      * </a>
      * @param zoneName The name of the zone to remove IP.
      * @param ips The list of IP to remove.
