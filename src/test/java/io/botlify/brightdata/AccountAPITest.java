@@ -1,6 +1,6 @@
 package io.botlify.brightdata;
 
-import io.botlify.brightdata.response.account.Balance;
+import io.botlify.brightdata.response.account.BalanceResponse;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class AccountAPITest {
     @Test
     void getBalance() throws IOException {
         final AccountAPI accountAPI = new BrightDataAPI(brightDataApiKey).getAccountAPI();
-        final Balance balance = accountAPI.getBalance();
-        assertNotNull(balance);
+        final BalanceResponse balanceResponse = accountAPI.getBalance();
+        assertNotNull(balanceResponse);
     }
 }

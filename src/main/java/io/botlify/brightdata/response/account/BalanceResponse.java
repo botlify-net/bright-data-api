@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
-public final class Balance {
+public final class BalanceResponse {
 
     /**
      * The amount of money in your account.
@@ -22,7 +22,7 @@ public final class Balance {
      * Construct a balance response from a JSON object.
      * @param response The JSON object to parse.
      */
-    public Balance(@NotNull final JSONObject response) {
+    public BalanceResponse(@NotNull final JSONObject response) {
         this.balance = response.getInt("balance");
         this.pendingCosts = response.getInt("pending_costs");
     }

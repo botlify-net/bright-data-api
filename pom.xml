@@ -4,7 +4,7 @@
   <groupId>io.botlify.brightdata</groupId>
   <artifactId>bright-data-api</artifactId>
 
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <name>Bright-data API</name>
   <url>https://github.com/botlify-io</url>
 
