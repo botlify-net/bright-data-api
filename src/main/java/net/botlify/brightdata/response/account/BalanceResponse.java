@@ -1,4 +1,4 @@
-package io.botlify.brightdata.response.account;
+package net.botlify.brightdata.response.account;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;

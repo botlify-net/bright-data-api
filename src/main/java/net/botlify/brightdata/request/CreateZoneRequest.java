@@ -1,8 +1,8 @@
-package io.botlify.brightdata.request;
+package net.botlify.brightdata.request;
 
-import io.botlify.brightdata.enums.*;
 import lombok.Builder;
 import lombok.Getter;
+import net.botlify.brightdata.enums.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;

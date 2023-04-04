@@ -1,6 +1,6 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
-import io.botlify.brightdata.response.account.BalanceResponse;
+import net.botlify.brightdata.response.account.BalanceResponse;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 

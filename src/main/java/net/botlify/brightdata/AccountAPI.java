@@ -1,6 +1,6 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
-import io.botlify.brightdata.response.account.BalanceResponse;
+import net.botlify.brightdata.response.account.BalanceResponse;
 import lombok.extern.log4j.Log4j2;
 import okhttp3.Request;
 import okhttp3.Response;

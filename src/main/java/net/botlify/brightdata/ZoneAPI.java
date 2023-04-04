@@ -1,10 +1,10 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
-import io.botlify.brightdata.object.LumTestEcho;
-import io.botlify.brightdata.object.ZoneInformation;
-import io.botlify.brightdata.request.CreateZoneRequest;
-import io.botlify.brightdata.response.AddIpInZoneResponse;
-import io.botlify.brightdata.response.ZoneCreatedResponse;
+import net.botlify.brightdata.object.LumTestEcho;
+import net.botlify.brightdata.object.ZoneInformation;
+import net.botlify.brightdata.request.CreateZoneRequest;
+import net.botlify.brightdata.response.AddIpInZoneResponse;
+import net.botlify.brightdata.response.ZoneCreatedResponse;
 import lombok.extern.log4j.Log4j2;
 import okhttp3.Request;
 import okhttp3.RequestBody;

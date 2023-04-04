@@ -1,4 +1,4 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
 import lombok.Getter;
 import okhttp3.OkHttpClient;

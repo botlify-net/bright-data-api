@@ -1,4 +1,4 @@
-package io.botlify.brightdata.object;
+package net.botlify.brightdata.object;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

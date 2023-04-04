@@ -1,7 +1,7 @@
-package io.botlify.brightdata.object;
+package net.botlify.brightdata.object;
 
-import io.botlify.brightdata.enums.IpType;
-import io.botlify.brightdata.enums.PlanType;
+import net.botlify.brightdata.enums.IpType;
+import net.botlify.brightdata.enums.PlanType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

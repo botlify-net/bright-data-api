@@ -1,23 +1,27 @@
-package io.botlify.brightdata.enums;
+package net.botlify.brightdata.enums;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public enum VipsType {
+public enum IpType {
 
     SHARED("shared"),
-    DEDICATED("domain");
 
-    @NotNull @Getter
+    DEDICATED("dedicated"),
+
+    SELECTIVE("selective");
+
+    @NotNull
+    @Getter
     private final String type;
 
-    VipsType(@NotNull final String type) {
+    IpType(@NotNull final String type) {
         this.type = type;
     }
 
-    public static @Nullable VipsType fromString(@NotNull final String type) {
-        for (VipsType t : VipsType.values()) {
+    public static @Nullable IpType fromString(@NotNull final String type) {
+        for (final IpType t : IpType.values()) {
             if (t.type.equalsIgnoreCase(type))
                 return (t);
         }
@@ -29,5 +33,4 @@ public enum VipsType {
     public @NotNull String toString() {
         return (type);
     }
-
 }

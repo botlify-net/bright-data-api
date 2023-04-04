@@ -1,10 +1,10 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
-import io.botlify.brightdata.enums.PlanType;
-import io.botlify.brightdata.object.ZoneInformation;
-import io.botlify.brightdata.request.CreateZoneRequest;
-import io.botlify.brightdata.response.AddIpInZoneResponse;
-import io.botlify.brightdata.response.ZoneCreatedResponse;
+import net.botlify.brightdata.enums.PlanType;
+import net.botlify.brightdata.object.ZoneInformation;
+import net.botlify.brightdata.request.CreateZoneRequest;
+import net.botlify.brightdata.response.AddIpInZoneResponse;
+import net.botlify.brightdata.response.ZoneCreatedResponse;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 

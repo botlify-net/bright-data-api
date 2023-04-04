@@ -40,4 +40,5 @@ build/
 
 logs
 .idea
-/src/main/java/io/botlify/brightdata/TestClass.java
+/src/main/java/net/botlify/brightdata/TestClass.java
+/src/main/java/net/botlify/brightdata/TestClass.java

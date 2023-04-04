@@ -1,24 +1,23 @@
-package io.botlify.brightdata.enums;
+package net.botlify.brightdata.enums;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public enum IpAllocPresetType {
+public enum VipsType {
 
-    SHARED_BLOCK("shared_block"),
-    SHARED_RES_BLOCK("shared_res_block");
+    SHARED("shared"),
+    DEDICATED("domain");
 
-    @NotNull
-    @Getter
+    @NotNull @Getter
     private final String type;
 
-    IpAllocPresetType(@NotNull final String type) {
+    VipsType(@NotNull final String type) {
         this.type = type;
     }
 
-    public static @Nullable IpAllocPresetType fromString(@NotNull final String type) {
-        for (IpAllocPresetType t : IpAllocPresetType.values()) {
+    public static @Nullable VipsType fromString(@NotNull final String type) {
+        for (VipsType t : VipsType.values()) {
             if (t.type.equalsIgnoreCase(type))
                 return (t);
         }

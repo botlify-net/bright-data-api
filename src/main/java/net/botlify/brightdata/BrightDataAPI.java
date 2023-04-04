@@ -1,7 +1,7 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
 import com.google.common.util.concurrent.RateLimiter;
-import io.botlify.brightdata.object.LumTestEcho;
+import net.botlify.brightdata.object.LumTestEcho;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;

@@ -1,6 +1,6 @@
-package io.botlify.brightdata;
+package net.botlify.brightdata;
 
-import io.botlify.brightdata.object.LumTestEcho;
+import net.botlify.brightdata.object.LumTestEcho;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

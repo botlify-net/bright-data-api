@@ -1,4 +1,4 @@
-package io.botlify.brightdata.enums;
+package net.botlify.brightdata.enums;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
