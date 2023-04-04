@@ -148,6 +148,103 @@ public class ZoneAPI extends SubAPI {
         }
     }
 
+    // Enable / Disable zone
+
+    /**
+     * Check if a zone is enabled.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419841373585-Get-Zone-status">
+     *     Link to the documentation
+     * </a>.
+     * @param zone The name of the zone to check if it is enabled.
+     * @return {@code true} if the zone is enabled, {@code false} otherwise, or
+     * {@code null} if the zone doesn't exist.
+     * @throws IOException A network error occurred.
+     */
+    public @Nullable Boolean isZoneEnabled(@NotNull final String zone) throws IOException {
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/status?zone=" + zone;
+        log.trace("URL: {}", url);
+        final Request request = new Request.Builder()
+                .url(url)
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+        try (final Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            log.trace("Response code: {}", response.code());
+            log.trace("Response message: {}", body);
+            if (response.code() != 200)
+                return (null);
+            log.trace("Response body: {}", body);
+
+            final String responseString = new JSONObject(body).getString("status");
+            return (responseString.equals("active"));
+        }
+    }
+
+    /**
+     * Enable or disable a zone.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419841373585-Get-Zone-status">
+     *     Link to the documentation
+     * </a>.
+     * @param name The name of the zone to enable or disable.
+     * @param newValue {@code true} to enable the zone, {@code false} to disable it.
+     * @return {@code true} if the zone has been enabled or disabled, {@code false} otherwise.
+     * @throws IOException A network error occurred.
+     */
+    public boolean setZoneEnabled(@NotNull final String name,
+                                  final boolean newValue) throws IOException {
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/change_disable";
+        final JSONObject bodyRequest = new JSONObject();
+        bodyRequest.put("zone", name);
+        bodyRequest.put("disable", (newValue ? 1 : 0));
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(RequestBody.create(bodyRequest.toString(),
+                        okhttp3.MediaType.parse("application/json")))
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+        try (final Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            log.trace("Response code: {}", response.code());
+            log.trace("Response message: {}", body);
+            return (response.code() == 200);
+        }
+    }
+
+    // Password
+
+    /**
+     * Retrieve the passwords of the specified zone.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419813586577-Get-Zone-passwords">
+     *     Link to the documentation
+     * </a>.
+     * @param zone The name of the zone to get the passwords.
+     * @return The list of passwords of the zone given in parameter.
+     * @throws IOException A network error occurred.
+     */
+    public @Nullable List<String> getZonePassword(@NotNull final String zone) throws IOException {
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/passwords?zone=" + zone;
+        log.trace("URL: {}", url);
+        final Request request = new Request.Builder()
+                .url(url)
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+        try (final Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            log.trace("Response code: {}", response.code());
+            log.trace("Response message: {}", body);
+            if (response.code() != 200)
+                return (null);
+            log.trace("Response body: {}", body);
+
+            final JSONArray passwords = new JSONObject(body).getJSONArray("passwords");
+            final List<String> passwordsList = new ArrayList<>();
+            for (int i = 0; i < passwords.length(); i++)
+                passwordsList.add(passwords.getString(i));
+            return (passwordsList);
+        }
+    }
+
     // Whitelist
 
     /**
