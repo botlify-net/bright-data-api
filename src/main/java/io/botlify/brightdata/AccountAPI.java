@@ -9,6 +9,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+/**
+ * This sub api is used to manage the account on BrightData.
+ */
 @Log4j2
 public class AccountAPI extends SubAPI {
 

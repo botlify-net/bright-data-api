@@ -5,6 +5,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.internal.http2.Header;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The SubAPI class to be extended by all the sub API.
+ */
 public abstract class SubAPI {
 
     /**
