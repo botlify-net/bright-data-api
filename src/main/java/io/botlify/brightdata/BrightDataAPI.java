@@ -97,7 +97,7 @@ public class BrightDataAPI {
      * @return {@code true} if the proxy is valid, {@code false} otherwise.
      */
     public boolean testProxyValidity(@NotNull final String username,
-                                  @NotNull final String password) {
+                                     @NotNull final String password) {
         return (testProxyValidity(brightDataSuperProxyHost, brightDataSuperProxyPort,
                 username, password));
     }
@@ -167,12 +167,12 @@ public class BrightDataAPI {
         log.trace("Get information about my IP...");
         final String url = "https://lumtest.com/echo.json";
 
-        final okhttp3.Request request = new okhttp3.Request.Builder()
+        final Request request = new Request.Builder()
                 .url(url)
                 .get()
                 .build();
 
-        try (final okhttp3.Response response = client.newCall(request).execute()) {
+        try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
             log.trace("Response body: {}", body);
             return (new LumTestEcho(new JSONObject(body)));
