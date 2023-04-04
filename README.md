@@ -29,7 +29,7 @@ Add the dependency in your pom.xml:
 <dependency>
     <groupId>io.botlify.brightdata</groupId>
     <artifactId>bright-data-api</artifactId>
-	<version>1.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 
