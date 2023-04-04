@@ -40,3 +40,4 @@ build/
 
 logs
 .idea
+/src/main/java/io/botlify/brightdata/TestClass.java

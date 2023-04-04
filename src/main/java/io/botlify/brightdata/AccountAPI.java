@@ -23,7 +23,6 @@ public class AccountAPI extends SubAPI {
         super(brightDataAPI);
     }
 
-
     /**
      * Get the balance of the account.
      * <a href="https://help.brightdata.com/hc/en-us/articles/4419694483473-Get-total-balance-through-API">

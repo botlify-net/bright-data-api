@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 /**
@@ -34,13 +35,13 @@ public final class ZoneCreatedResponse {
     @NotNull @Getter
     private final String bandwidth;
 
-    @NotNull @Getter
+    @Nullable @Getter
     private final String disable;
 
-    @NotNull @Getter
+    @Getter
     private final boolean allocMaxAvailable;
 
-    @NotNull @Getter
+    @Getter
     private final boolean noReserve;
 
     @NotNull @Getter
@@ -62,7 +63,10 @@ public final class ZoneCreatedResponse {
         this.ipsType = plan.getString("ips_type");
         this.product = plan.getString("product");
         this.bandwidth = plan.getString("bandwidth");
-        this.disable = plan.getString("disable");
+        if (plan.has("disable"))
+            this.disable = plan.getString("disable");
+        else
+            this.disable = null;
         allocOpt = jsonObject.getJSONObject("alloc_opt");
         this.allocMaxAvailable = allocOpt.getBoolean("alloc_max_available");
         this.noReserve = allocOpt.getBoolean("no_reserve");

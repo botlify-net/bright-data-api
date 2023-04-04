@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -329,12 +330,14 @@ public class ZoneAPI extends SubAPI {
      */
     public boolean whitelistIp(@NotNull final String zone,
                                @NotNull final String... ip) throws IOException {
-        log.trace("Whitelist IP in zone {}: {}", zone, List.of(ip));
+        final List<String> ips = Arrays.asList(ip);
+        log.trace("Whitelist IP in zone {}: {}", zone, ips);
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/whitelist";
 
         final JSONObject bodyRequest = new JSONObject();
-        bodyRequest.put("zone", zone);
-        bodyRequest.put("ips", new JSONArray(List.of(ip)));
+        bodyRequest.put("zone", zone.toLowerCase());
+        bodyRequest.put("ip", new JSONArray(Arrays.asList(ip)));
+        log.trace("Body request: {}", bodyRequest.toString());
 
         final Request request = new Request.Builder()
                 .url(url)
@@ -345,8 +348,9 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
+            log.trace("Response code: {}", response.code());
             log.trace("Response body: {}", body);
-            return (new JSONObject(body).getBoolean("success"));
+            return (response.code() >= 200 && response.code() < 300);
         }
     }
 
@@ -382,7 +386,7 @@ public class ZoneAPI extends SubAPI {
      */
     public @NotNull List<String> getIpOfZone(@NotNull final String zoneName) throws IOException {
         log.trace("Get IP of zone: {}", zoneName);
-        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/ips?zone=" + zoneName;
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/ips?zone=" + zoneName.toLowerCase();
 
         final Request request = new Request.Builder()
                 .url(url)
@@ -441,7 +445,8 @@ public class ZoneAPI extends SubAPI {
     public @NotNull List<String> removeIpInZone(@NotNull final String zoneName,
                                                 @NotNull final String... ips)
             throws IOException {
-        return (this.removeIpInZone(zoneName, List.of(ips)));
+        final List<String> ipsList = Arrays.asList(ips);
+        return (this.removeIpInZone(zoneName, ipsList));
     }
 
     /**

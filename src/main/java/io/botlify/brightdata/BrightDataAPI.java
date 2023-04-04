@@ -1,6 +1,6 @@
 package io.botlify.brightdata;
 
-import com.atlassian.guava.common.util.concurrent.RateLimiter;
+import com.google.common.util.concurrent.RateLimiter;
 import io.botlify.brightdata.object.LumTestEcho;
 import lombok.AccessLevel;
 import lombok.Getter;
