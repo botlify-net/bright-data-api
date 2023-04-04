@@ -13,6 +13,13 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>atlassian-public</id>
+      <url>https://packages.atlassian.com/mvn/maven-external/</url>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -50,6 +57,11 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.9.2</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-rate-limiter</artifactId>
+      <version>15.0-atlassian-1</version>
     </dependency>
   </dependencies>
   <build>

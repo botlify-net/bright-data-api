@@ -1,5 +1,6 @@
 package io.botlify.brightdata;
 
+import com.atlassian.guava.common.util.concurrent.RateLimiter;
 import io.botlify.brightdata.object.LumTestEcho;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,12 +31,20 @@ public class BrightDataAPI {
      * The HTTP client used to send request to the API.
      */
     @NotNull @Getter(AccessLevel.PACKAGE)
-    private final OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client;
+
+    @NotNull
+    private final RateLimiter rateLimiter = RateLimiter.create(1.5);
 
     public BrightDataAPI(@NotNull final String apiKey) {
         if (apiKey.isEmpty())
             throw (new IllegalArgumentException("The API key cannot be empty."));
         this.authorizationHeader = new Header("Authorization", "Bearer " + apiKey);
+        this.client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    rateLimiter.acquire();
+                    return chain.proceed(chain.request());
+                }).build();
     }
 
     /**

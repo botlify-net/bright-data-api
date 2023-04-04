@@ -48,3 +48,9 @@ BrightDataAPI api = new BrightDataAPI(brightDataApiKey);
 
 If you want more example of usage, you can check the wiki at the following link
 <a href="https://github.com/botlify-io/bright-data-api/wiki">here</a>.
+
+### Additional information about rate limiting
+
+The BrightData API is a REST API is rate limited to 1 request per second per API key.
+This api includes a rate limiter to avoid reaching the limit, this rate limiter is configured to allow 1 request
+every 1.5 seconds.

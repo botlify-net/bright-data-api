@@ -6,7 +6,6 @@ import io.botlify.brightdata.request.CreateZoneRequest;
 import io.botlify.brightdata.response.AddIpInZoneResponse;
 import io.botlify.brightdata.response.ZoneCreatedResponse;
 import lombok.extern.log4j.Log4j2;
-import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -20,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
