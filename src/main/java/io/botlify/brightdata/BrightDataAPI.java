@@ -26,6 +26,18 @@ public class BrightDataAPI {
     private static final String brightDataHost = "https://brightdata.com";
 
     /**
+     * The host of the super proxy of BrightData.
+     */
+    @Getter @NotNull
+    private static final String brightDataSuperProxyHost = "zproxy.lum-superproxy.io";
+
+    /**
+     * The port of the super proxy of BrightData.
+     */
+    @Getter
+    private static final int brightDataSuperProxyPort = 22225;
+
+    /**
      * The authorization header used to authenticate the user.
      */
     @NotNull @Getter(AccessLevel.PACKAGE)
