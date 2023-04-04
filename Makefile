@@ -22,4 +22,4 @@ clean:
 		mvn clean
 
 finstall:
-		mvn install -DskipTests=true
+		mvn install -Dmaven.test.skip=true
