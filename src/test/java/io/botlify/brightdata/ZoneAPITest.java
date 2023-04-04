@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +29,15 @@ class ZoneAPITest {
     public void getZoneInformation() throws IOException {
         final ZoneAPI api = new BrightDataAPI(brightDataApiKey).getZoneAPI();
         final ZoneInformation zoneInformation = api.getZoneInformation(brightDataZoneName);
+        assertNotNull(zoneInformation);
+        System.out.println("zoneInformation: " + zoneInformation);
+    }
+
+    @Test
+    public void getZoneInformationNotExist() throws IOException {
+        final String badZoneName = UUID.randomUUID().toString();
+        final ZoneAPI api = new BrightDataAPI(brightDataApiKey).getZoneAPI();
+        final ZoneInformation zoneInformation = api.getZoneInformation(badZoneName);
         assertNotNull(zoneInformation);
         System.out.println("zoneInformation: " + zoneInformation);
     }

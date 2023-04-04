@@ -61,6 +61,28 @@ public class ZoneAPI extends SubAPI {
         }
     }
 
+    /**
+     * This method will return {@code true} if the zone specified in parameter exist.
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419703061137-Get-Zone-info">
+     *     Link to the documentation
+     * </a>.
+     * @param zoneName The name of the zone to check if it exists.
+     * @return {@code true} if the zone exist, {@code false} otherwise.
+     */
+    public boolean isZoneExist(@NotNull final String zoneName) throws IOException {
+        log.trace("Get information about zone: {}", zoneName);
+        final String url = BrightDataAPI.getBrightDataHost() + "/api/zone?zone=" + zoneName;
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
+                .build();
+
+        try (final Response response = client.newCall(request).execute()) {
+            return (response.code() == 200);
+        }
+    }
+
     // Whitelist
 
     /**
