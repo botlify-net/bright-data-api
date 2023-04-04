@@ -5,6 +5,7 @@
 ### Requirements
 
 You need to have maven installed on your machine, and make sure you have a JDK 8 installed.
+Follow this link to install maven: https://maven.apache.org/install.html
 
 ### How to install the package locally ?
 
@@ -29,7 +30,7 @@ Add the dependency in your pom.xml:
 <dependency>
     <groupId>io.botlify.brightdata</groupId>
     <artifactId>bright-data-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>LATEST</version>
 </dependency>
 ```
 
@@ -38,3 +39,6 @@ Instantiate the BrightDataAPI class with your API key.
 String brightDataApiKey = "youApiKey";
 BrightDataAPI api = new BrightDataAPI(brightDataApiKey);
 ```
+
+If you want more example of usage, you can check the wiki at the following link:
+https://github.com/botlify-io/bright-data-api/wiki
