@@ -12,6 +12,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+/**
+ * This class is the main class of the API.
+ * It is used to manage the API and the sub API.
+ */
 @Log4j2
 public class BrightDataAPI {
 
