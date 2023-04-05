@@ -5,9 +5,7 @@ on:
     branches:
       - master
 
-permissions:
-  contents: read
-  packages: write
+permissions: read-all|write-all
 
 jobs:
     release:
