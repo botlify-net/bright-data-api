@@ -39,11 +39,3 @@ jobs:
             body_path: CHANGELOG.md
             draft: false
             prerelease: false
-        # Deploy the artifacts to GitHub Package Registry.
-        - name: Deploy to GitHub Package Registry
-          uses: elgohr/Github-Action-Maven-Deploy@v1.0.0
-          with:
-            server: https://maven.pkg.github.com/botlify-net/bright-data-api
-            repository: botlify-net/bright-data-api
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
