@@ -95,12 +95,12 @@
 				<snapshotRepository>
 					<id>github</id>
 					<name>GitHub</name>
-					<url>https://maven.pkg.github.com/botlify-io/bright-data-api</url>
+					<url>https://maven.pkg.github.com/botlify-net/bright-data-api</url>
 				</snapshotRepository>
 				<repository>
 					<id>github</id>
 					<name>GitHub</name>
-					<url>https://maven.pkg.github.com/botlify-io/bright-data-api</url>
+					<url>https://maven.pkg.github.com/botlify-net/bright-data-api</url>
 				</repository>
 			</distributionManagement>
 		</profile>
