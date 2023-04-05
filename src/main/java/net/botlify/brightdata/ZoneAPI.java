@@ -44,10 +44,10 @@ public class ZoneAPI extends SubAPI {
      *     Link to the documentation
      * </a>.
      * @param zoneName The name of the zone to get information about it.
-     * @return A {@link ZoneInformation} object or {@code null} if the zone doesn't exist.
+     * @return A {@link ZoneInformation} object.
      * @throws IOException A network error occurred.
      */
-    public @Nullable ZoneInformation getZoneInformation(@NotNull final String zoneName) throws IOException {
+    public @NotNull ZoneInformation getZoneInformation(@NotNull final String zoneName) throws IOException {
         log.trace("Get information about zone: {}", zoneName);
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone?zone=" + zoneName;
 
@@ -57,9 +57,8 @@ public class ZoneAPI extends SubAPI {
                 .build();
 
         try (final Response response = client.newCall(request).execute()) {
-            if (response.code() != 200) return (null);
             final String body = response.body().string();
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
             return (new ZoneInformation(new JSONObject(body)));
         }
     }
@@ -93,10 +92,10 @@ public class ZoneAPI extends SubAPI {
      *     Link to the documentation
      * </a>.
      * @param createZoneRequest The request to create a new zone.
-     * @return The information about the zone created or {@code null} if the zone already exist.
+     * @return The information about the zone created.
      * @throws IOException A network error occurred.
      */
-    public @Nullable ZoneCreatedResponse createZone(@NotNull final CreateZoneRequest createZoneRequest) throws IOException {
+    public @NotNull ZoneCreatedResponse createZone(@NotNull final CreateZoneRequest createZoneRequest) throws IOException {
         log.trace("Create zone: {}", createZoneRequest);
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone";
         final JSONObject bodyRequest = createZoneRequest.toJSONObject();
@@ -110,10 +109,7 @@ public class ZoneAPI extends SubAPI {
                 .build();
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response code: {}", response.code());
-            log.trace("Response message: {}", body);
-            if (response.code() != 200) return (null);
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
             return (new ZoneCreatedResponse(new JSONObject(body)));
         }
     }
@@ -141,8 +137,7 @@ public class ZoneAPI extends SubAPI {
                 .build();
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response code: {}", response.code());
-            log.trace("Response message: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
             return (response.code() == 200);
         }
     }
@@ -155,11 +150,10 @@ public class ZoneAPI extends SubAPI {
      *     Link to the documentation
      * </a>.
      * @param zone The name of the zone to check if it is enabled.
-     * @return {@code true} if the zone is enabled, {@code false} otherwise, or
-     * {@code null} if the zone doesn't exist.
+     * @return {@code true} if the zone is enabled, {@code false} otherwise.
      * @throws IOException A network error occurred.
      */
-    public @Nullable Boolean isZoneEnabled(@NotNull final String zone) throws IOException {
+    public boolean isZoneEnabled(@NotNull final String zone) throws IOException {
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/status?zone=" + zone;
         log.trace("URL: {}", url);
         final Request request = new Request.Builder()
@@ -168,12 +162,7 @@ public class ZoneAPI extends SubAPI {
                 .build();
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response code: {}", response.code());
-            log.trace("Response message: {}", body);
-            if (response.code() != 200)
-                return (null);
-            log.trace("Response body: {}", body);
-
+            brightDataAPI.assertResponse(response.code(), body);
             final String responseString = new JSONObject(body).getString("status");
             return (responseString.equals("active"));
         }
@@ -204,9 +193,8 @@ public class ZoneAPI extends SubAPI {
                 .build();
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response code: {}", response.code());
-            log.trace("Response message: {}", body);
-            return (response.code() == 200);
+            brightDataAPI.assertResponse(response.code(), body);
+            return (true);
         }
     }
 
@@ -221,7 +209,7 @@ public class ZoneAPI extends SubAPI {
      * @return The list of passwords of the zone given in parameter.
      * @throws IOException A network error occurred.
      */
-    public @Nullable List<String> getZonePassword(@NotNull final String zone) throws IOException {
+    public @NotNull List<String> getZonePassword(@NotNull final String zone) throws IOException {
         final String url = BrightDataAPI.getBrightDataHost() + "/api/zone/passwords?zone=" + zone;
         log.trace("URL: {}", url);
         final Request request = new Request.Builder()
@@ -230,11 +218,7 @@ public class ZoneAPI extends SubAPI {
                 .build();
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response code: {}", response.code());
-            log.trace("Response message: {}", body);
-            if (response.code() != 200)
-                return (null);
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
 
             final JSONArray passwords = new JSONObject(body).getJSONArray("passwords");
             final List<String> passwordsList = new ArrayList<>();
@@ -268,7 +252,8 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
+
             final JSONObject jsonResponse = new JSONObject(body);
             if (!jsonResponse.has(zone)) return new ArrayList<>(0);
             final JSONArray jsonIpList = jsonResponse.getJSONArray(zone);
@@ -299,7 +284,8 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
+
             final JSONObject jsonResponse = new JSONObject(body);
             final Map<String, List<String>> mapResponse = jsonResponse.keySet().stream()
                     .collect(Collectors.toMap(
@@ -348,8 +334,7 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response code: {}", response.code());
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
             return (response.code() >= 200 && response.code() < 300);
         }
     }
@@ -395,7 +380,8 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
+
             final JSONArray ips = new JSONObject(body).getJSONArray("ips");
 
             final List<String> result = new ArrayList<>(ips.length());
@@ -437,7 +423,7 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String responseBody = response.body().string();
-            log.trace("Response body: {}", responseBody);
+            brightDataAPI.assertResponse(response.code(), responseBody);
             return (new AddIpInZoneResponse(new JSONObject(responseBody)));
         }
     }
@@ -476,7 +462,8 @@ public class ZoneAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String responseBody = response.body().string();
-            log.trace("Response body: {}", responseBody);
+            brightDataAPI.assertResponse(response.code(), responseBody);
+
             final JSONArray ipsJson = new JSONObject(responseBody).getJSONArray("ips");
             return (ipsJson.toList()
                     .stream()

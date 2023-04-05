@@ -42,7 +42,7 @@ public class AccountAPI extends SubAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response body: {}", body);
+            brightDataAPI.assertResponse(response.code(), body);
             final JSONObject jsonResponse = new JSONObject(body);
             return (new BalanceResponse(jsonResponse));
         }

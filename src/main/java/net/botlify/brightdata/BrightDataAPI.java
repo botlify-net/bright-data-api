@@ -1,6 +1,8 @@
 package net.botlify.brightdata;
 
 import com.google.common.util.concurrent.RateLimiter;
+import lombok.SneakyThrows;
+import net.botlify.brightdata.exception.BrightDataException;
 import net.botlify.brightdata.object.LumTestEcho;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -134,6 +136,9 @@ public class BrightDataAPI {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
+            final String body = response.body().string();
+            final int code = response.code();
+            assertResponse(code, body);
             return (response.code() == 200);
         } catch (Exception e) {
             log.trace("Fail to test the proxy validity because of an error: {}",
@@ -141,6 +146,8 @@ public class BrightDataAPI {
             return (false);
         }
     }
+
+    // Sub API
 
     /**
      * Get the object to manage the zone.
@@ -162,6 +169,7 @@ public class BrightDataAPI {
      * Get the information about your IP.<br />
      * From the <a href="https://lumtest.com/echo.json">link</a>.
      * @return A {@link LumTestEcho} object with the information about your IP.
+     * @throws IOException If an error occurs while sending the request.
      */
     public @NotNull LumTestEcho getMyIpInformation() throws IOException {
         log.trace("Get information about my IP...");
@@ -174,9 +182,25 @@ public class BrightDataAPI {
 
         try (final Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
-            log.trace("Response body: {}", body);
+            final int code = response.code();
+            assertResponse(code, body);
             return (new LumTestEcho(new JSONObject(body)));
         }
+    }
+
+    /**
+     * This method will check if the response code is 200
+     * and if the body is not empty.
+     * @param code The response code.
+     * @param body The response body.
+     */
+    @SneakyThrows
+    void assertResponse(final int code, @NotNull final String body) {
+        log.trace("Response body: {}", body);
+        log.trace("Response code: {}", code);
+        // Check if the code is between 200 and 299.
+        if (code < 200 || code > 299)
+            throw (new BrightDataException(code, body));
     }
 
 }
