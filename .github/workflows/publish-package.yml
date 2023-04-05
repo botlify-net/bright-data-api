@@ -55,8 +55,8 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
           server-id: github
-          server-username: github
-          server-password: ${{ secrets.GITHUB_TOKEN }}
       # STEP 2: Publish to GitHub Packages
       - name: Publish to GitHub Packages
         run: mvn --batch-mode deploy -Dmaven.test.skip=true -P "github"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
