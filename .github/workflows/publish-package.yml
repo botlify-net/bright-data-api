@@ -1,9 +1,9 @@
 name: Publish package
 
-on:
-  workflow_run:
-    workflows: ["Create Release"]
-    types: [completed]
+on: [push]
+  #workflow_run:
+  #  workflows: ["Create Release"]
+  #  types: [completed]
 
 jobs:
   publish:
@@ -12,7 +12,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Pull the code from the repository
+        uses: actions/checkout@v3
       - name: Set up Java for publishing to Maven Central Repository
         uses: actions/setup-java@v3
         with:
@@ -22,7 +23,9 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Install GPG key
-        run: cat ${{ secrets.OSSRH_GPG_SECRET_KEY }} | base64 -d | gpg --batch --import
+        run: |
+          sudo apt-get install gnupg
+          cat ${{ secrets.OSSRH_GPG_SECRET_KEY }} | base64 -d | gpg --batch --import
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode \
                clean deploy \
