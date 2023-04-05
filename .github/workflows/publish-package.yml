@@ -31,7 +31,7 @@ jobs:
           server-password: MAVEN_PASSWORD
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode \
-               clean deploy \
+               deploy \
                -Dmaven.test.skip=true \
                -Dgpg.passphrase=${{ secrets.OSSRH_GPG_PASSPHRASE }}
         env:
@@ -44,7 +44,7 @@ jobs:
           distribution: 'temurin'
       - name: Publish to GitHub Packages
         run: mvn --batch-mode \
-               clean deploy \
+               deploy \
                -Dmaven.test.skip=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
