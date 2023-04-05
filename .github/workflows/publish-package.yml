@@ -19,7 +19,7 @@ jobs:
       #   2 - PUSH TO GITHUB PACKAGE
       ##########################################
       # STEP 1: Set up Java for publishing to Maven Central Repository
-      - name: Set up Java for publishing to Maven Central Repository
+      - name: Set up Java for publishing to GitHub Package
         uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -29,4 +29,4 @@ jobs:
           server-password: ${{ secrets.GITHUB_TOKEN }}
       # STEP 2: Publish to GitHub Packages
       - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy -Dmaven.test.skip=true -P github
+        run: mvn --batch-mode deploy -Dmaven.test.skip=true -P "github"
