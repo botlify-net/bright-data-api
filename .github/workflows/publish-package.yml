@@ -12,36 +12,21 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: Install GPG key
-        run: |
-          echo "Installing GNUPG..."
-          sudo apt-get install gnupg
-          echo "Importing GPG key..."
-          echo -n "${{ secrets.OSSRH_GPG_PRIVATE_KEY }}" | base64 -d | gpg --batch --import
-          echo "GPG key imported."
-      - name: Pull the code from the repository
-        uses: actions/checkout@v3
+      ##########################################
+      #   1 - PUSH TO MAVEN CENTRAL
+      ##########################################
+      ##########################################
+      #   2 - PUSH TO GITHUB PACKAGE
+      ##########################################
+      # STEP 1: Set up Java for publishing to Maven Central Repository
       - name: Set up Java for publishing to Maven Central Repository
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'adopt'
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-      - name: Register key to Ubuntu Keyserver
-        run: gpg --keyserver keyserver.ubuntu.com --send-keys ${{ secrets.OSSRH_GPG_KEY_ID }}
-      - name: Publish to the Maven Central Repository
-        run: mvn --batch-mode deploy -Dmaven.test.skip=true -Dgpg.passphrase=${{ secrets.OSSRH_GPG_PASSPHRASE }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      - name: Set up Java for publishing to GitHub Packages
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+          server-id: github
+          server-username: github
+          server-password: ${{ secrets.GITHUB_TOKEN }}
+      # STEP 2: Publish to GitHub Packages
       - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy -Dmaven.test.skip=true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn --batch-mode deploy -Dmaven.test.skip=true -P github
