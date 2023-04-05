@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
     release:
       runs-on: ubuntu-latest
@@ -37,6 +41,11 @@ jobs:
             body_path: CHANGELOG.md
             draft: false
             prerelease: false
-        # Push to the GitHub package.
-        - name: Push to the github package
-          run: mvn deploy -DskipTests -Dmaven.javadoc.skip=true -B -V
+        # Deploy the artifacts to GitHub Package Registry.
+        - name: Deploy to GitHub Package Registry
+          uses: elgohr/Github-Action-Maven-Deploy@v1.0.0
+          with:
+            server: https://maven.pkg.github.com/botlify-net/bright-data-api
+            repository: OWNER/REPOSITORY
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
