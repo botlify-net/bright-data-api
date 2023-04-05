@@ -15,6 +15,35 @@ jobs:
       ##########################################
       #   1 - PUSH TO MAVEN CENTRAL
       ##########################################
+      # STEP 1: Install GPG key
+      - name: Install GPG key
+        run: |
+          echo "Installing GNUPG..."
+          sudo apt-get install gnupg
+          echo "Importing GPG key..."
+          echo -n "${{ secrets.OSSRH_GPG_PRIVATE_KEY }}" | base64 -d | gpg --batch --import
+          echo "GPG key imported."
+      # STEP 2: Register key to Ubuntu Keyserver
+      - name: Register key to Ubuntu Keyserver
+        run: gpg --keyserver keyserver.ubuntu.com --send-keys ${{ secrets.OSSRH_GPG_KEY_ID }}
+      # STEP 3: Pull the code from the repository
+      - name: Pull the code from the repository
+        uses: actions/checkout@v3
+      # STEP 4: Set up Java for publishing to Maven Central Repository
+      - name: Set up Java for publishing to Maven Central Repository
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      # STEP 5: Publish to the Maven Central Repository
+      - name: Publish to the Maven Central Repository
+        # run: mvn --batch-mode deploy -Dmaven.test.skip=true -Dgpg.passphrase=${{ secrets.OSSRH_GPG_PASSPHRASE }}
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
       ##########################################
       #   2 - PUSH TO GITHUB PACKAGE
       ##########################################
