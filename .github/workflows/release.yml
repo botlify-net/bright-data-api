@@ -32,8 +32,11 @@ jobs:
             # This token is provided by Actions, you do not need to create your own token.
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            tag_name: ${{ steps.pomVersion.outputs.version }}
+            tag_name: v${{ steps.pomVersion.outputs.version }}
+            release_name: Version ${{ steps.pomVersion.outputs.version }}
             body_path: CHANGELOG.md
-            release_name: Release ${{ steps.pomVersion.outputs.version }}
             draft: false
             prerelease: false
+        # Push to the GitHub package.
+        - name: Push to the github package
+          run: mvn deploy -DskipTests -Dmaven.javadoc.skip=true -B -V
