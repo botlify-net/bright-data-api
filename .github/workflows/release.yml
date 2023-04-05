@@ -11,8 +11,7 @@ jobs:
 
     steps:
       # Pull the code from the repository.
-      - name: Pull the code from the repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       # Set up JDK 17 for the build (maven included).
       - name: Set up JDK 17
         uses: actions/setup-java@v3
