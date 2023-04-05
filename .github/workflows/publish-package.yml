@@ -1,8 +1,9 @@
-name: Publish package to the Maven Central Repository and GitHub Packages
+name: Publish package
 
 on:
-  release:
-    types: [created]
+  workflow_run:
+    workflows: ["Create Release"]
+    types: [completed]
 
 jobs:
   publish:
