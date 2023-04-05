@@ -40,6 +40,7 @@ jobs:
           server-password: MAVEN_PASSWORD
       # STEP 5: Publish to the Maven Central Repository
       - name: Publish to the Maven Central Repository
+        run: echo "ok"
         # run: mvn --batch-mode deploy -Dmaven.test.skip=true -Dgpg.passphrase=${{ secrets.OSSRH_GPG_PASSPHRASE }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
