@@ -208,6 +208,16 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<!-- Maven checkstyle plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
