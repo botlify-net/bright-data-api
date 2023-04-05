@@ -24,8 +24,10 @@ jobs:
           server-password: MAVEN_PASSWORD
       - name: Install GPG key
         run: |
+          echo "Installing GNUPG..."
           sudo apt-get install gnupg
-          cat ${{ secrets.OSSRH_GPG_SECRET_KEY }} | base64 -d | gpg --batch --import
+          echo "Importing GPG key..."
+          echo ${{ secrets.OSSRH_GPG_SECRET_KEY }} | base64 -d | gpg --batch --import
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode \
                clean deploy \
