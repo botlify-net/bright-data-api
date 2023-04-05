@@ -34,6 +34,6 @@ jobs:
           with:
             tag_name: ${{ steps.pomVersion.outputs.version }}
             body_path: CHANGELOG.md
-            release_name: Release ${{ steps.pom-version.outputs.version }}
+            release_name: Release ${{ steps.pomVersion.outputs.version }}
             draft: false
             prerelease: false
