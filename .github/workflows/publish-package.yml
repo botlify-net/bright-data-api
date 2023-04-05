@@ -28,6 +28,7 @@ jobs:
           sudo apt-get install gnupg
           echo "Importing GPG key..."
           echo -n "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | base64 -d | gpg --batch --import
+          echo "GPG key imported."
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode \
                clean deploy \
