@@ -7,8 +7,8 @@
   <groupId>net.botlify.brightdata</groupId>
   <artifactId>bright-data-api</artifactId>
 
-  <version>1.0-SNAPSHOT</version>
   <name>BrightData API</name>
+  <version>1.0</version>
   <url>https://github.com/botlify-io/bright-data-api</url>
   <description>An interface to communicate simpler with brightdata.com</description>
 
