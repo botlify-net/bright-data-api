@@ -62,6 +62,10 @@ public class BrightDataAPI {
     @NotNull
     private final RateLimiter rateLimiter = RateLimiter.create(1.5);
 
+    /**
+     * Construct a new API with the given API key.
+     * @param apiKey The BrightData API key.
+     */
     public BrightDataAPI(@NotNull final String apiKey) {
         if (apiKey.isEmpty())
             throw (new IllegalArgumentException("The API key cannot be empty."));

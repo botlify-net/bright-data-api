@@ -14,42 +14,82 @@ import org.json.JSONObject;
 @ToString
 public final class ZoneCreatedResponse {
 
+    /**
+     * The password of the zone.
+     */
     @NotNull @Getter
     private final String password;
 
+    /**
+     * The ips of the zone.
+     */
     @NotNull @Getter
     private final String ips;
 
+    /**
+     * The plan start date of the zone.
+     */
     @NotNull @Getter
     private final String planStart;
 
+    /**
+     * The plan type of the zone.
+     */
     @NotNull @Getter
     private final String planType;
 
+    /**
+     * The ips type of the zone.
+     */
     @NotNull @Getter
     private final String ipsType;
 
+    /**
+     * The product of the zone.
+     */
     @NotNull @Getter
     private final String product;
 
+    /**
+     * The bandwidth of the zone.
+     */
     @NotNull @Getter
     private final String bandwidth;
 
+    /**
+     * The disable of the zone.
+     */
     @Nullable @Getter
     private final String disable;
 
+    /**
+     * The alloc max available of the zone.
+     */
     @Getter
     private final boolean allocMaxAvailable;
 
+    /**
+     * The no reserve of the zone.
+     */
     @Getter
     private final boolean noReserve;
 
+    /**
+     * The user of the zone.
+     */
     @NotNull @Getter
     private final String user;
 
+    /**
+     * The req source of the zone.
+     */
     @NotNull @Getter
     private final String reqSource;
 
+    /**
+     * Constructor of the zone created response from the JSON object.
+     * @param jsonObject The JSON object to parse.
+     */
     public ZoneCreatedResponse(@NotNull final JSONObject jsonObject) {
         final JSONObject zone;
         final JSONObject plan;

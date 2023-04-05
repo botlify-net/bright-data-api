@@ -428,6 +428,16 @@ public class ZoneAPI extends SubAPI {
         }
     }
 
+    /**
+     * This method will request to remove the specified IP to the specified zone.<br />
+     * <a href="https://help.brightdata.com/hc/en-us/articles/4419834577041-Remove-Static-Datacenter-ISP-IPs">
+     *     Link to the documentation
+     * </a>
+     * @param zoneName The name of the zone to remove IP.
+     * @param ips The list of IP to remove.
+     * @return A new list of IP removed from the specified zone.
+     * @throws IOException A network error occurred.
+     */
     public @NotNull List<String> removeIpInZone(@NotNull final String zoneName,
                                                 @NotNull final String... ips)
             throws IOException {

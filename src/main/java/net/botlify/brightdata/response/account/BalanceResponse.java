@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
+/**
+ * This class is the response of the getBalance method.
+ */
 public final class BalanceResponse {
 
     /**

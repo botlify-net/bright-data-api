@@ -42,3 +42,7 @@ logs
 .idea
 /src/main/java/net/botlify/brightdata/TestClass.java
 /src/main/java/net/botlify/brightdata/TestClass.java
+/secret.txt
+decode.sh
+base64privKey.txt
+privKey.pem

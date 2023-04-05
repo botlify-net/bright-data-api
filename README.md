@@ -29,6 +29,13 @@ If you want to run the tests, you need to set the API key in the environment var
 mvn clean install
 ```
 
+### How to get the java documentation ?
+
+To generete the site for the java documentation please use the following command:
+```bash
+mvn javadoc:javadoc
+```
+
 ### How to use ?
 
 Add the dependency in your pom.xml:

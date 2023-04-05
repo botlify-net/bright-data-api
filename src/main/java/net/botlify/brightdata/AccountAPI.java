@@ -29,6 +29,7 @@ public class AccountAPI extends SubAPI {
      *     Link to the documentation
      * </a>.
      * @return The {@link BalanceResponse} object response.
+     * @throws IOException If an error occurred during the request.
      */
     public @NotNull BalanceResponse getBalance() throws IOException {
         final String url = BrightDataAPI.getBrightDataHost() + "/api/customer/balance";

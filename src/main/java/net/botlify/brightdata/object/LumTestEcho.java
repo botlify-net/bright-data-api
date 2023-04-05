@@ -10,54 +10,106 @@ import org.json.JSONObject;
  */
 public final class LumTestEcho {
 
+    /**
+     * The ip found.
+     */
     @NotNull @Getter
     private final String ip;
 
+    /**
+     * The country of the ip.
+     */
     @NotNull @Getter
     private final String country;
 
+    /**
+     * The asnum of the ip.
+     */
     @Getter
     private final int asnum;
 
+    /**
+     * The organisation name of the ip.
+     */
     @NotNull @Getter
     private final String orgName;
 
+    /**
+     * The city of the ip.
+     */
     @NotNull @Getter
     private final String city;
 
+    /**
+     * The region of the ip.
+     */
     @NotNull @Getter
     private final String region;
 
+    /**
+     * The region name of the ip.
+     */
     @NotNull @Getter
     private final String regionName;
 
+    /**
+     * The postal code of the ip.
+     */
     @NotNull @Getter
     private final String postalCode;
 
+    /**
+     * The latitude of the ip.
+     */
     @Getter
     private final double latitude;
 
+    /**
+     * The longitude of the ip.
+     */
     @Getter
     private final double longitude;
 
+    /**
+     * The timezone of the ip.
+     */
     @NotNull @Getter
     private final String tz;
 
+    /**
+     * The brightdata city of the ip.
+     */
     @NotNull @Getter
     private final String lumCity;
 
+    /**
+     * The brightdata region of the ip.
+     */
     @NotNull @Getter
     private final String lumRegion;
 
+    /**
+     * The method of the request.
+     */
     @NotNull @Getter
     private final String method;
 
+    /**
+     * The http version of the request.
+     */
     @NotNull @Getter
     private final String httpVersion;
 
+    /**
+     * The headers of the request.
+     */
     @NotNull @Getter
     private final JSONObject headers;
 
+    /**
+     * Constructor of the class from a {@link JSONObject} to parse.
+     * @param jsonObject The {@link JSONObject} to parse.
+     */
     public LumTestEcho(@NotNull final JSONObject jsonObject) {
         final JSONObject asn;
         final JSONObject geo;

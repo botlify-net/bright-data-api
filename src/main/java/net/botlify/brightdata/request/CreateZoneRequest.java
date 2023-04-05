@@ -1,7 +1,9 @@
 package net.botlify.brightdata.request;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import net.botlify.brightdata.enums.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,7 +11,9 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-@Builder(setterPrefix = "with")
+/**
+ * This class is the request of the createZone method.
+ */
 public class CreateZoneRequest {
 
     /**
@@ -27,68 +31,109 @@ public class CreateZoneRequest {
     /**
      * The type of ips to use.
      */
-    @Nullable @Getter
-    private final IpType ipsType;
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private IpType ipsType;
 
     /**
      * The bandwidth type.
      */
-    @Nullable @Getter
-    private final BandwidthType bandwidthType;
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private BandwidthType bandwidthType;
 
     /**
      * The ip allocation preset type.
      */
-    @Nullable @Getter
-    private final IpAllocPresetType ipAllocPresetType;
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private IpAllocPresetType ipAllocPresetType;
 
     /**
      * The number of ip to allocate.
      */
-    @Nullable @Getter
-    private final Integer ipToAllocate;
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Integer ipToAllocate;
 
     /**
      * The country code of the zone ips.
      */
-    @Nullable @Getter
-    private final String country;
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private String country;
 
     /**
      * The country city of the zone ips.
      */
-    @Nullable @Getter
-    private final String countryCity;
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private String countryCity;
 
-    @Nullable @Getter
-    private final Boolean mobile;
+    /**
+     * The boolean to use mobile ips.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Boolean mobile;
 
-    @Nullable @Getter
-    private final Boolean serp;
+    /**
+     * The serp boolean.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Boolean serp;
 
-    @Nullable @Getter
-    private final Boolean cityTargetingPermission;
+    /**
+     * The city targeting permission boolean.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Boolean cityTargetingPermission;
 
-    @Nullable @Getter
-    private final Boolean enablingAsnTargetingPermission;
+    /**
+     * The asn targeting permission boolean.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Boolean enablingAsnTargetingPermission;
 
-    @Nullable @Getter
-    private final Boolean vip;
+    /**
+     * The boolean to use vip ips.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Boolean vip;
 
-    @Nullable @Getter
-    private final VipsType vipsType;
+    /**
+     * The vip type.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private VipsType vipsType;
 
-    @Nullable @Getter
-    private final Integer vips;
+    /**
+     * The number of vip ips to use.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private Integer vips;
 
-    @Nullable @Getter
-    private final List<String> domainWitelist;
+    /**
+     * The list of domains to whitelist.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private List<String> domainWitelist;
 
-    @Nullable @Getter
-    private final String vipCountry;
+    /**
+     * The vip country code.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private String vipCountry;
 
-    @Nullable @Getter
-    private final String vipCountryCity;
+    /**
+     * The vip country city.
+     */
+    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    private String vipCountryCity;
+
+    /**
+     * Create a new request.
+     * @param name The name of the zone.
+     * @param planType The plan type.
+     */
+    public CreateZoneRequest(@NotNull final String name,
+                             @NotNull final PlanType planType) {
+        this.name = name;
+        this.type = planType;
+    }
 
     /**
      * Convert this object to a JSON object for the request.
@@ -137,7 +182,6 @@ public class CreateZoneRequest {
             plan.put("vip_country_city", vipCountryCity);
         result.put("plan", plan);
         return (result);
-
     }
 
 }

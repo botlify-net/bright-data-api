@@ -10,6 +10,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the zone information object.
+ * It contains all the information about a zone.
+ */
 @EqualsAndHashCode
 @ToString
 public class ZoneInformation {
@@ -32,6 +36,10 @@ public class ZoneInformation {
     @NotNull @Getter
     private final Plan plan;
 
+    /**
+     * Constructor of the zone information from the JSON object.
+     * @param jsonObject The JSON object to parse.
+     */
     public ZoneInformation(@NotNull final JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("password");
         this.password = new ArrayList<>();

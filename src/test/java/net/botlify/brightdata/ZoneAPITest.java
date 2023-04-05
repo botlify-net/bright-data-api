@@ -41,10 +41,7 @@ class ZoneAPITest {
         final String zoneName = randomZoneName();
 
         // Create the zone.
-        final CreateZoneRequest czr = CreateZoneRequest.builder()
-                .withName(zoneName)
-                .withType(PlanType.STATIC)
-                .build();
+        final CreateZoneRequest czr = new CreateZoneRequest(zoneName, PlanType.STATIC);
         final ZoneCreatedResponse zoneInformation = api.createZone(czr);
         System.out.println("zoneInformation: " + zoneInformation);
         assertNotNull(zoneInformation);

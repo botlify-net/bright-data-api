@@ -10,16 +10,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the response of the addIpInZone method.
+ */
 @EqualsAndHashCode
 @ToString
 public class AddIpInZoneResponse {
 
+    /**
+     * The list of ip that was already in the zone before the call.
+     */
     @NotNull @Getter
     private final List<String> ips = new ArrayList<>();
 
+    /**
+     * The list of new IPs added.
+     */
     @NotNull @Getter
     private final List<String> newIps = new ArrayList<>();
 
+    /**
+     * Constructor of the response from the JSON object.
+     * @param jsonObject The JSON object to parse.
+     */
     public AddIpInZoneResponse(@NotNull final JSONObject jsonObject) {
         final JSONArray ips = jsonObject.getJSONArray("ips");
         for (int i = 0; i < ips.length(); i++) {

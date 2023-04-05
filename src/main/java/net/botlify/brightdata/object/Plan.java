@@ -11,37 +11,71 @@ import org.json.JSONObject;
 import java.time.Instant;
 import java.util.Objects;
 
+/**
+ * The plan object.
+ */
 @EqualsAndHashCode
 @ToString
 public class Plan {
 
+    /**
+     * The start date of the plan.
+     */
     @NotNull @Getter
     private final Instant start;
 
+    /**
+     * The product of the plan.
+     */
     @NotNull @Getter
     private final String product;
 
+    /**
+     * The type of the plan.
+     */
     @NotNull @Getter
     private final PlanType type;
 
+    /**
+     * The ip fallback number of the plan.
+     */
     @Getter
     private final int ipFallback;
 
+    /**
+     * The type of ips of the plan.
+     */
     @NotNull @Getter
     private final IpType ipsType;
 
+    /**
+     * The number of ips of the plan.
+     */
     @Getter
     private final int ips;
 
+    /**
+     * The country code of the plan.
+     */
     @NotNull @Getter
     private final String country;
 
+    /**
+     * The bandwidth of the plan.
+     */
     @NotNull @Getter
     private final String bandwidth;
 
+    /**
+     * The number of new ips of the plan.
+     */
     @Getter
     private final int ips_new;
 
+    /**
+     * Constructor of the plan from the JSON object.
+     * @param jsonObject The JSON object to parse.
+     */
     public Plan(@NotNull final JSONObject jsonObject) {
         this.start = Instant.parse(jsonObject.getString("start"));
         this.product = jsonObject.getString("product");
@@ -54,6 +88,18 @@ public class Plan {
         this.ips_new = jsonObject.getInt("ips_new");
     }
 
+    /**
+     * Constructor of the plan.
+     * @param start The start date of the plan.
+     * @param product The product of the plan.
+     * @param type The type of the plan.
+     * @param ipFallback The ip fallback number of the plan.
+     * @param ipsType The type of ips of the plan.
+     * @param ips The number of ips of the plan.
+     * @param country The country code of the plan.
+     * @param bandwidth The bandwidth of the plan.
+     * @param ips_new The number of new ips of the plan.
+     */
     public Plan(@NotNull final Instant start,
                 @NotNull final String product,
                 @NotNull final PlanType type,
@@ -74,6 +120,10 @@ public class Plan {
         this.ips_new = ips_new;
     }
 
+    /**
+     * Convert the plan to a JSON object.
+     * @return The JSON object of the plan.
+     */
     @Deprecated
     public @NotNull JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
