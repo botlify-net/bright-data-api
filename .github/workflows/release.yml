@@ -27,12 +27,13 @@ jobs:
           uses: entimaniac/read-pom-version-action@1.0.0
         # Create a release.
         - name: Create Release
-          uses: actions/create-release@v1
+          uses: actions/create-release@v1.1.4
           env:
+            # This token is provided by Actions, you do not need to create your own token.
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             tag_name: ${{ steps.pomVersion.outputs.version }}
-            body: CHANGELOG.md
+            body_path: CHANGELOG.md
             release_name: Release ${{ steps.pom-version.outputs.version }}
             draft: false
             prerelease: false
