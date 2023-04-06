@@ -107,9 +107,9 @@
 	</profiles>
 
 	<scm>
-		<connection>scm:github:https://github.com/botlify-io/bright-data-api</connection>
-		<developerConnection>scm:github:https://github.com/botlify-io/bright-data-api</developerConnection>
-		<url>https://github.com/botlify-io/bright-data-api</url>
+		<connection>scm:github:https://github.com/botlify-net/bright-data-api</connection>
+		<developerConnection>scm:github:https://github.com/botlify-net/bright-data-api</developerConnection>
+		<url>https://github.com/botlify-net/bright-data-api</url>
 		<tag>master</tag>
 	</scm>
 
