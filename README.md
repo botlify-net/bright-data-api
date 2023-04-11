@@ -1,7 +1,7 @@
 # Bright-data API
 
-[![Latest release](https://img.shields.io/github/release/botlify-net/bright-data-api.svg)](https://github.com/botlify-io/bright-data-api/releases/latest)
-[![Build Status](https://github.com/botlify-net/bright-data-api/workflows/Java%20CI/badge.svg?branch=master)](https://github.com/botlify-io/guava/bright-data-api/actions)
+[![Latest release](https://img.shields.io/github/release/botlify-net/bright-data-api.svg)](https://github.com/botlify-net/bright-data-api/releases/latest)
+[![Build Status](https://github.com/botlify-net/bright-data-api/workflows/Java%20CI/badge.svg?branch=master)](https://github.com/botlify-net/bright-data-api/actions)
 
 This project is a Java client for the BrightData API, which allows you to access the
 BrightData API from your Java application without having to deal with the HTTP requests.

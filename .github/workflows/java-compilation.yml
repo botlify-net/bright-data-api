@@ -15,3 +15,5 @@ jobs:
           distribution: 'temurin'
       - name: Compilation with Maven
         run: mvn compile
+      - name: JavaDoc
+        run: mvn javadoc:javadoc

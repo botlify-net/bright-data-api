@@ -10,7 +10,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,7 +55,7 @@ public class ZoneAPI extends SubAPI {
                 .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
                 .build();
 
-        try (final Response response = client.newCall(request).execute()) {
+        try (Response response = client.newCall(request).execute()) {
             final String body = response.body().string();
             brightDataAPI.assertResponse(response.code(), body);
             return (new ZoneInformation(new JSONObject(body)));
@@ -81,7 +80,7 @@ public class ZoneAPI extends SubAPI {
                 .addHeader(authorizationHeader.name.utf8(), authorizationHeader.value.utf8())
                 .build();
 
-        try (final Response response = client.newCall(request).execute()) {
+        try (Response response = client.newCall(request).execute()) {
             return (response.code() == 200);
         }
     }

@@ -5,7 +5,7 @@
 ## Generic Makefile for Botlify
 ##
 
-.PHONY: all test clean fclean re doc
+.PHONY: all test clean fclean install finstall re doc
 
 #=================================
 #	Commands
@@ -20,6 +20,12 @@ test:
 
 clean:
 		mvn clean
+
+fclean:
+		rm -rf target
+
+install:
+		mvn install
 
 finstall:
 		mvn install -Dmaven.test.skip=true

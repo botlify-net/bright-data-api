@@ -46,3 +46,6 @@ logs
 decode.sh
 base64privKey.txt
 privKey.pem
+pubKey
+private.pgp
+privKey.pem

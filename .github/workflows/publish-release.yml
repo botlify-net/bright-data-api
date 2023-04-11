@@ -15,11 +15,12 @@ jobs:
         - name: Pull the code from the repository
           uses: actions/checkout@v3
         # Set up JDK 17 for the build (maven included).
-        - name: Set up JDK 17
+        - name: Set up Java for publishing to GitHub Package
           uses: actions/setup-java@v3
           with:
             java-version: '17'
-            distribution: 'temurin'
+            distribution: 'adopt'
+            server-id: github
         # Build the project with Maven.
         - name: Compilation with Maven
           run: mvn compile

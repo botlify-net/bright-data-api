@@ -31,97 +31,97 @@ public class CreateZoneRequest {
     /**
      * The type of ips to use.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private IpType ipsType;
 
     /**
      * The bandwidth type.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private BandwidthType bandwidthType;
 
     /**
      * The ip allocation preset type.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private IpAllocPresetType ipAllocPresetType;
 
     /**
      * The number of ip to allocate.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Integer ipToAllocate;
 
     /**
      * The country code of the zone ips.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private String country;
 
     /**
      * The country city of the zone ips.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private String countryCity;
 
     /**
      * The boolean to use mobile ips.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Boolean mobile;
 
     /**
      * The serp boolean.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Boolean serp;
 
     /**
      * The city targeting permission boolean.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Boolean cityTargetingPermission;
 
     /**
      * The asn targeting permission boolean.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Boolean enablingAsnTargetingPermission;
 
     /**
      * The boolean to use vip ips.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Boolean vip;
 
     /**
      * The vip type.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private VipsType vipsType;
 
     /**
      * The number of vip ips to use.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private Integer vips;
 
     /**
      * The list of domains to whitelist.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
-    private List<String> domainWitelist;
+    @Nullable @Getter
+    private List<String> domainWhitelist;
 
     /**
      * The vip country code.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private String vipCountry;
 
     /**
      * The vip country city.
      */
-    @Nullable @Getter @Setter(AccessLevel.PUBLIC)
+    @Nullable @Getter
     private String vipCountryCity;
 
     /**
@@ -174,14 +174,174 @@ public class CreateZoneRequest {
             plan.put("vips_type", vipsType.toString());
         if (vips != null)
             plan.put("vips", vips);
-        if (domainWitelist != null)
-            plan.put("domain_whitelist", domainWitelist);
+        if (domainWhitelist != null)
+            plan.put("domain_whitelist", domainWhitelist);
         if (vipCountry != null)
             plan.put("vip_country", vipCountry);
         if (vipCountryCity != null)
             plan.put("vip_country_city", vipCountryCity);
         result.put("plan", plan);
         return (result);
+    }
+
+    /**
+     * Set the country code of the zone ips.
+     * @param ipsType The country code of the zone ips.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setIpsType(@Nullable final IpType ipsType) {
+        this.ipsType = ipsType;
+        return (this);
+    }
+
+    /**
+     * Set the bandwidth type.
+     * @param bandwidthType The bandwidth type.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setBandwidthType(@Nullable final BandwidthType bandwidthType) {
+        this.bandwidthType = bandwidthType;
+        return (this);
+    }
+
+    /**
+     * Set the ip allocation preset type.
+     * @param ipAllocPresetType The ip allocation preset type.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setIpAllocPresetType(@Nullable final IpAllocPresetType ipAllocPresetType) {
+        this.ipAllocPresetType = ipAllocPresetType;
+        return (this);
+    }
+
+    /**
+     * Set the number of ip to allocate.
+     * @param ipToAllocate The number of ip to allocate.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setIpToAllocate(@Nullable final Integer ipToAllocate) {
+        this.ipToAllocate = ipToAllocate;
+        return (this);
+    }
+
+    /**
+     * Set the country code.
+     * @param country The country code.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setCountry(@Nullable final String country) {
+        this.country = country;
+        return (this);
+    }
+
+    /**
+     * Set the country city.
+     * @param countryCity The country city.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setCountryCity(@Nullable final String countryCity) {
+        this.countryCity = countryCity;
+        return (this);
+    }
+
+    /**
+     * Set the mobile boolean.
+     * @param mobile The mobile boolean.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setMobile(@Nullable final Boolean mobile) {
+        this.mobile = mobile;
+        return (this);
+    }
+
+    /**
+     * Set the serp boolean.
+     * @param serp The serp boolean.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setSerp(@Nullable final Boolean serp) {
+        this.serp = serp;
+        return (this);
+    }
+
+    /**
+     * Set the city targeting permission boolean.
+     * @param cityTargetingPermission The city targeting permission boolean.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setCityTargetingPermission(@Nullable final Boolean cityTargetingPermission) {
+        this.cityTargetingPermission = cityTargetingPermission;
+        return (this);
+    }
+
+    /**
+     * Set the asn targeting permission boolean.
+     * @param enablingAsnTargetingPermission The asn targeting permission boolean.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setEnablingAsnTargetingPermission(@Nullable final Boolean enablingAsnTargetingPermission) {
+        this.enablingAsnTargetingPermission = enablingAsnTargetingPermission;
+        return (this);
+    }
+
+    /**
+     * Set the domain whitelist.
+     * @param vip The boolean to use vip ips.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setVip(@Nullable final Boolean vip) {
+        this.vip = vip;
+        return (this);
+    }
+
+    /**
+     * Set the vip type.
+     * @param vipsType The vip type.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setVipsType(@Nullable final VipsType vipsType) {
+        this.vipsType = vipsType;
+        return (this);
+    }
+
+    /**
+     * Set the number of vip ips to use.
+     * @param vips The number of vip ips to use.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setVips(@Nullable final Integer vips) {
+        this.vips = vips;
+        return (this);
+    }
+
+    /**
+     * Set the domain whitelist.
+     * @param domainWhitelist The domain whitelist.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setDomainWhitelist(@Nullable final List<String> domainWhitelist) {
+        this.domainWhitelist = domainWhitelist;
+        return (this);
+    }
+
+    /**
+     * Set the vip country.
+     * @param vipCountry The vip country.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setVipCountry(@Nullable final String vipCountry) {
+        this.vipCountry = vipCountry;
+        return (this);
+    }
+
+    /**
+     * Set the vip country city.
+     * @param vipCountryCity The vip country city.
+     * @return This request.
+     */
+    public @NotNull CreateZoneRequest setVipCountryCity(@Nullable final String vipCountryCity) {
+        this.vipCountryCity = vipCountryCity;
+        return (this);
     }
 
 }
