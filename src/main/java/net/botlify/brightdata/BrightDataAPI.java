@@ -140,8 +140,12 @@ public class BrightDataAPI {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            final String body = response.body().string();
             final int code = response.code();
+            if (code == 407) {
+                log.trace("Fail to test the proxy validity because of a proxy authentication error.");
+                return (false);
+            }
+            final String body = response.body().string();
             assertResponse(code, body);
             return (response.code() == 200);
         } catch (Exception e) {

@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.time.Instant;
@@ -39,8 +40,8 @@ public class Plan {
     /**
      * The ip fallback number of the plan.
      */
-    @Getter
-    private final int ipFallback;
+    @Getter @Nullable
+    private final Integer ipFallback;
 
     /**
      * The type of ips of the plan.
@@ -69,8 +70,8 @@ public class Plan {
     /**
      * The number of new ips of the plan.
      */
-    @Getter
-    private final int ips_new;
+    @Getter @Nullable
+    private final Integer ips_new;
 
     /**
      * Constructor of the plan from the JSON object.
@@ -80,12 +81,20 @@ public class Plan {
         this.start = Instant.parse(jsonObject.getString("start"));
         this.product = jsonObject.getString("product");
         this.type = Objects.requireNonNull(PlanType.fromString(jsonObject.getString("type")));
-        this.ipFallback = jsonObject.getInt("ip_fallback");
         this.ipsType = Objects.requireNonNull(IpType.fromString(jsonObject.getString("ips_type")));
         this.ips = jsonObject.getInt("ips");
         this.country = jsonObject.getString("country");
         this.bandwidth = jsonObject.getString("bandwidth");
-        this.ips_new = jsonObject.getInt("ips_new");
+        // Ip fallback
+        if (jsonObject.has("ip_fallback"))
+            this.ipFallback = jsonObject.getInt("ip_fallback");
+        else
+            this.ipFallback = null;
+        // Ips new
+        if (jsonObject.has("ips_new"))
+            this.ips_new = jsonObject.getInt("ips_new");
+        else
+            this.ips_new = null;
     }
 
     /**
@@ -130,12 +139,12 @@ public class Plan {
         jsonObject.put("start", start.toString());
         jsonObject.put("product", product);
         jsonObject.put("type", type.toString());
-        jsonObject.put("ip_fallback", ipFallback);
+        jsonObject.put("ip_fallback", (ipFallback == null) ? JSONObject.NULL : ipFallback);
         jsonObject.put("ips_type", ipsType.toString());
         jsonObject.put("ips", ips);
         jsonObject.put("country", country);
         jsonObject.put("bandwidth", bandwidth);
-        jsonObject.put("ips_new", ips_new);
+        jsonObject.put("ips_new", (ips_new == null) ? JSONObject.NULL : ips_new);
         return jsonObject;
     }
 
